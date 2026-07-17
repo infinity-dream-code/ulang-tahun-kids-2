@@ -22,18 +22,18 @@
 
 <style>
   :root{
-    --cream:#FFF8F1;
-    --cream-2:#FFF1E6;
-    --pink-blush:#FFD9E6;
-    --pink-mid:#FFB3CB;
-    --pink-deep:#FF6F9C;
-    --pink-deeper:#E85585;
-    --lavender:#D8CBFF;
-    --lavender-deep:#B7A2F5;
-    --mint:#BEF2DB;
-    --gold:#FFCF6B;
-    --ink:#5C3B4D;
-    --ink-soft:#8A6B7A;
+    --cream:#F8F6FF;
+    --cream-2:#F2EDFF;
+    --pink-blush:#F4D8FF;
+    --pink-mid:#EAB8FF;
+    --pink-deep:#BB6BFF;
+    --pink-deeper:#8E44EC;
+    --lavender:#DCCBFF;
+    --lavender-deep:#9F7CF8;
+    --mint:#C9F7EF;
+    --gold:#FFD889;
+    --ink:#44335E;
+    --ink-soft:#72608E;
     --frame-w:min(100vw, 480px);
     --frame-h:100vh;
     --frame-left:max(0px, calc(50% - min(240px, 50vw)));
@@ -71,7 +71,7 @@
       --frame-top:calc((100vh - var(--frame-h)) / 2);
     }
     body{
-      background:linear-gradient(135deg,#2c1b26,#4a2c3f);
+      background:linear-gradient(135deg,#1e1833,#30224f);
       min-height:100vh;
     }
     .stage{
@@ -87,17 +87,21 @@
     left:var(--frame-left);
     width:var(--frame-w);
     height:var(--frame-h);
-    background:#FFCADD;
-    background-image:radial-gradient(circle at 50% 20%, #FFE3EE 0%, #FFCADD 45%, #F7A8C6 100%);
+    background:#E8D8FF;
+    background-image:radial-gradient(circle at 50% 15%, #F6EEFF 0%, #E8D8FF 42%, #C8A6FF 100%);
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:32px;
+    text-align:center; padding:28px 28px 16vh;
     overflow:hidden;
     isolation:isolate;
   }
   #cover::before{
     content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
-    background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=60') center/cover;
-    opacity:.08;
+    background:url('https://images.unsplash.com/photo-1419242902214-272b3b89c7d0?auto=format&fit=crop&w=900&q=60') center/cover;
+    opacity:.12;
+  }
+  #cover::after{
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background:linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(142,68,236,.12) 55%, rgba(90,45,166,.18) 100%);
   }
   #cover > *:not(#coverFlash){ position:relative; z-index:1; }
   @media(min-width:481px){ #cover{ border-radius:32px; } }
@@ -118,6 +122,11 @@
     width:150px; height:150px; object-fit:contain;
     filter:drop-shadow(0 8px 18px rgba(92,59,77,.18));
   }
+  .aurora-card{
+    background:linear-gradient(135deg, rgba(187,107,255,.12), rgba(255,216,137,.18));
+    backdrop-filter:blur(2px);
+    border:1px solid rgba(255,255,255,.45);
+  }
   #cover:not(.cover-ready) .cover-line,
   #cover:not(.cover-ready) #coverMascot,
   #cover:not(.cover-ready) #openBtn,
@@ -137,11 +146,61 @@
   }
 
   .open-btn{
-    background:linear-gradient(135deg,var(--pink-deep),var(--pink-deeper));
-    box-shadow:0 8px 0 #C23F6C, 0 14px 24px rgba(194,63,108,.35);
-    transition:transform .15s ease, box-shadow .15s ease;
+    background:linear-gradient(135deg,#C56CFF,#8E44EC);
+    border:2px solid rgba(255,255,255,.42);
+    box-shadow:0 10px 0 #B33764, 0 16px 26px rgba(142,68,236,.42);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    font-weight:700;
+    min-width:240px;
   }
-  .open-btn:active{ transform:translateY(6px); box-shadow:0 2px 0 #C23F6C, 0 4px 10px rgba(194,63,108,.35); }
+  .open-btn:hover{ filter:brightness(1.04); }
+  .open-btn:active{ transform:translateY(7px); box-shadow:0 3px 0 #B33764, 0 7px 14px rgba(142,68,236,.35); }
+
+  .cover-tagline{ display:none; }
+  .cover-name{
+    color:#ffffff;
+    text-shadow:0 6px 24px rgba(90,45,166,.55), 0 2px 4px rgba(0,0,0,.22);
+    letter-spacing:.04em;
+  }
+  .cover-age{
+    color:#4C1D95;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(255,255,255,.82);
+    padding:7px 18px;
+    border-radius:999px;
+    display:inline-block;
+    box-shadow:0 6px 18px rgba(90,45,166,.16);
+  }
+  .cover-guest-card{
+    background:rgba(255,255,255,.6);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.85);
+    border-radius:22px;
+    padding:14px 28px 12px;
+    margin-bottom:28px;
+    box-shadow:0 10px 30px rgba(90,45,166,.14);
+  }
+  .cover-guest-label{
+    color:#7C5CD6;
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  .cover-guest-name{
+    color:#2E1A47;
+    font-weight:600;
+    margin-top:2px;
+  }
+  .cover-cta-note{ display:none; }
+  .open-btn{
+    animation:cover-cta-glow 2.2s ease-in-out infinite;
+  }
+  @keyframes cover-cta-glow{
+    0%,100%{ box-shadow:0 10px 0 #B33764, 0 16px 26px rgba(142,68,236,.42); }
+    50%{ box-shadow:0 10px 0 #B33764, 0 20px 32px rgba(142,68,236,.5); }
+  }
 
   /* ---------- Section reveal ---------- */
   .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease; }
@@ -204,23 +263,250 @@
   .time-box.pop{ transform:scale(1.08); }
   .countdown-icon{ font-size:1.1rem; color:var(--pink-deep); margin-bottom:2px; }
 
-  /* ---------- Cake / candle ---------- */
-  .flame{
-    animation:flicker 1.2s ease-in-out infinite alternate;
-    transform-origin:bottom center;
+  /* ---------- Star cake / blow hold ---------- */
+  .star-cake{
+    position:relative; width:240px; height:260px; margin:0 auto;
+    filter:drop-shadow(0 14px 24px rgba(68,51,94,.22));
+  }
+  .star-cake svg{ display:block; margin:0 auto; }
+  .candle-stick{
+    width:5px; height:22px; border-radius:2px;
+    background:linear-gradient(180deg,#fff6d0,#ffd889);
+    box-shadow:0 0 0 1px rgba(255,255,255,.25);
+  }
+  .star-flame{
+    width:14px; height:18px; border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 20%, #fff6b0, #ff9f43 70%, #ff6b6b);
+    animation:flicker 1s ease-in-out infinite alternate;
+    box-shadow:0 0 12px rgba(255,180,80,.8);
   }
   @keyframes flicker{
     0%{ transform:scaleY(1) rotate(-2deg); }
-    100%{ transform:scaleY(1.15) rotate(3deg); }
+    100%{ transform:scaleY(1.12) rotate(3deg); }
   }
-  .flame.blown{ animation:none; opacity:0; transition:opacity .3s ease; }
+  .star-flame.off{ opacity:0; transform:scale(.4); transition:opacity .35s ease, transform .35s ease; animation:none; }
+  .blow-btn{
+    background:linear-gradient(135deg,#7dd3fc,#60a5fa);
+    box-shadow:0 6px 0 #3b82c6, 0 10px 20px rgba(59,130,246,.28);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .blow-btn:active, .blow-btn.holding{
+    transform:translateY(4px);
+    box-shadow:0 2px 0 #3b82c6, 0 4px 10px rgba(59,130,246,.28);
+  }
+  .blow-meter{
+    height:10px; border-radius:999px; background:rgba(255,255,255,.25);
+    overflow:hidden; max-width:240px; margin:12px auto 0;
+  }
+  .blow-meter-fill{
+    height:100%; width:0%; border-radius:999px;
+    background:linear-gradient(90deg,#7dd3fc,#bb6bff);
+    transition:width .08s linear;
+  }
 
-  .cake-wrap{ cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
-  .smoke{ opacity:0; }
-  .smoke.show{ animation:smoke-rise 1.6s ease-out forwards; }
-  @keyframes smoke-rise{
-    0%{ opacity:.7; transform:translateY(0) scale(.6); }
-    100%{ opacity:0; transform:translateY(-30px) scale(1.4); }
+  /* ---------- Avatar dress-up ---------- */
+  .avatar-stage{
+    width:min(260px, 72vw); margin:0 auto 18px; padding:18px;
+    border-radius:28px; background:rgba(255,255,255,.72);
+    box-shadow:0 12px 30px rgba(68,51,94,.12);
+  }
+  .outfit-btn{
+    width:58px; height:58px; border-radius:18px; border:3px solid #fff;
+    box-shadow:0 6px 14px rgba(68,51,94,.14);
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .15s ease, box-shadow .15s ease;
+    cursor:pointer;
+  }
+  .outfit-btn i{ color:#fff; font-size:1.2rem; }
+  .outfit-btn.active{ transform:translateY(-4px) scale(1.06); box-shadow:0 10px 20px rgba(68,51,94,.2); outline:3px solid rgba(187,107,255,.35); }
+  #avatarDress{ transition:fill .35s ease; }
+  #avatarBow{ transition:fill .35s ease; }
+
+  /* ---------- Capsule gacha ---------- */
+  .capsule-machine{
+    width:min(300px, 86vw); margin:0 auto; position:relative;
+    background:linear-gradient(180deg,#c084fc 0%,#9333ea 45%,#7e22ce 100%);
+    border-radius:26px 26px 22px 22px;
+    border:4px solid #c4b5fd;
+    box-shadow:0 22px 44px rgba(126,34,206,.32), inset 0 2px 0 rgba(255,255,255,.35), inset 0 -5px 0 rgba(0,0,0,.12);
+    overflow:visible;
+  }
+  .capsule-machine.shake{ animation:capsule-shake .55s ease; }
+  @keyframes capsule-shake{
+    0%,100%{ transform:translateX(0); }
+    15%{ transform:translateX(-5px) rotate(-.6deg); }
+    30%{ transform:translateX(5px) rotate(.6deg); }
+    45%{ transform:translateX(-4px); }
+    60%{ transform:translateX(4px); }
+    75%{ transform:translateX(-2px); }
+  }
+  .capsule-header{
+    background:linear-gradient(180deg,#f3e8ff,#e9d5ff);
+    border-radius:22px 22px 0 0; padding:10px 14px 8px;
+    border-bottom:3px solid rgba(255,255,255,.45); text-align:center;
+  }
+  .capsule-header span{
+    font-family:'Fredoka',sans-serif; font-weight:700; font-size:.92rem;
+    letter-spacing:.12em; color:#6d28d9;
+    text-shadow:0 0 12px rgba(187,107,255,.45), 0 1px 0 rgba(255,255,255,.85);
+  }
+  .capsule-body{ display:flex; gap:10px; align-items:flex-end; padding:16px 16px 12px; }
+  .capsule-window{
+    flex:1; height:148px; border-radius:18px; position:relative; overflow:hidden;
+    background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,.06) 100%);
+    border:3px solid rgba(255,255,255,.55);
+    box-shadow:inset 0 6px 24px rgba(0,0,0,.14), inset 0 -3px 10px rgba(255,255,255,.18);
+  }
+  .capsule-window::before{
+    content:''; position:absolute; top:6px; left:10px; right:12px; height:38%;
+    background:linear-gradient(180deg,rgba(255,255,255,.38),transparent);
+    border-radius:14px; pointer-events:none; z-index:2;
+  }
+  .capsule-orbs{ position:absolute; inset:12px 10px 36px; z-index:1; }
+  .capsule-orb{
+    position:absolute; border-radius:50%;
+    box-shadow:inset -3px -5px 8px rgba(0,0,0,.14), 0 3px 8px rgba(0,0,0,.1);
+    animation:orb-bob 2.8s ease-in-out infinite;
+  }
+  @keyframes orb-bob{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-5px); }
+  }
+  .capsule-chute-label{
+    position:absolute; bottom:6px; left:50%; transform:translateX(-50%);
+    font-size:.6rem; font-weight:600; letter-spacing:.06em; color:rgba(255,255,255,.55);
+    z-index:2;
+  }
+  .capsule-lever-box{
+    width:58px; flex-shrink:0; display:flex; flex-direction:column;
+    align-items:center; padding-bottom:4px;
+  }
+  .capsule-lever-arm{
+    display:flex; flex-direction:column; align-items:center;
+    transform-origin:bottom center;
+    transition:transform .35s cubic-bezier(.34,1.56,.64,1);
+  }
+  .capsule-lever-box.pulling .capsule-lever-arm{ transform:rotate(-32deg); }
+  .capsule-lever-stick{
+    width:14px; height:76px; border-radius:7px;
+    background:linear-gradient(90deg,#64748b,#e2e8f0 45%,#94a3b8);
+    box-shadow:2px 0 6px rgba(0,0,0,.22);
+  }
+  .capsule-lever-knob{
+    width:32px; height:32px; border-radius:50%; margin-top:-6px; cursor:pointer;
+    background:radial-gradient(circle at 35% 28%,#ffc4d6,#e85585 55%,#be185d);
+    border:3px solid rgba(255,255,255,.65);
+    box-shadow:0 5px 12px rgba(232,85,133,.45), inset 0 -3px 5px rgba(0,0,0,.12);
+    transition:transform .15s ease;
+  }
+  .capsule-lever-knob:active{ transform:scale(.94); }
+  .capsule-lever-knob:disabled{ opacity:.6; cursor:not-allowed; }
+  .capsule-lever-label{
+    margin-top:6px; font-size:.65rem; font-weight:600; color:rgba(255,255,255,.85);
+    letter-spacing:.04em;
+  }
+  .capsule-slot{
+    height:52px; margin:0 18px 16px; position:relative;
+    background:linear-gradient(180deg,#1a1430,#2a2145);
+    border-radius:0 0 14px 14px;
+    border:3px solid rgba(255,255,255,.28); border-top:2px solid rgba(0,0,0,.25);
+    overflow:hidden;
+  }
+  .capsule-slot::before{
+    content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:54px; height:6px; border-radius:0 0 8px 8px;
+    background:rgba(0,0,0,.35);
+  }
+  .capsule-ball{
+    width:46px; height:46px; border-radius:50%; position:absolute;
+    left:50%; top:-60px; transform:translateX(-50%);
+    opacity:0; pointer-events:none;
+    box-shadow:inset -5px -8px 12px rgba(0,0,0,.15), 0 6px 14px rgba(0,0,0,.2);
+  }
+  .capsule-ball.half{
+    background:linear-gradient(180deg, var(--cap-top,#fff) 48%, var(--cap-bot,#bb6bff) 52%);
+  }
+  .capsule-ball.half::after{
+    content:''; position:absolute; left:4px; right:4px; top:50%; height:3px;
+    background:rgba(0,0,0,.12); border-radius:2px;
+  }
+  .capsule-ball.drop{
+    opacity:1;
+    animation:capsule-drop .85s cubic-bezier(.34,1.35,.64,1) forwards;
+  }
+  @keyframes capsule-drop{
+    0%{ top:-60px; transform:translateX(-50%) rotate(0deg); }
+    55%{ top:6px; transform:translateX(-50%) rotate(200deg); }
+    72%{ top:-3px; transform:translateX(-50%) rotate(230deg); }
+    100%{ top:4px; transform:translateX(-50%) rotate(210deg); }
+  }
+  .capsule-stars{
+    position:absolute; inset:0; pointer-events:none; overflow:hidden; border-radius:inherit;
+  }
+  .capsule-star{
+    position:absolute; color:rgba(255,255,255,.35); font-size:.7rem;
+    animation:star-twinkle 2s ease-in-out infinite;
+  }
+  @keyframes star-twinkle{
+    0%,100%{ opacity:.25; transform:scale(1); }
+    50%{ opacity:.8; transform:scale(1.15); }
+  }
+  .capsule-result-pop{
+    animation:result-pop .45s cubic-bezier(.34,1.4,.64,1);
+  }
+  @keyframes result-pop{
+    0%{ opacity:0; transform:translateY(8px) scale(.92); }
+    100%{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  /* ---------- Film strip gallery ---------- */
+  .film-wrap{
+    overflow:hidden; padding:10px 0 18px;
+    mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .film-marquee{
+    display:flex; width:max-content;
+    animation:film-scroll 28s linear infinite;
+  }
+  .film-marquee:hover{ animation-play-state:paused; }
+  @keyframes film-scroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+  }
+  .film-strip{
+    display:flex; gap:14px; flex:0 0 auto;
+    background:
+      repeating-linear-gradient(90deg, #2f2548 0 10px, transparent 10px 18px),
+      linear-gradient(180deg,#f8f6ff,#efe8ff);
+    border-radius:14px; padding:16px 12px;
+    box-shadow:0 12px 28px rgba(68,51,94,.12);
+  }
+  .film-frame{
+    flex:0 0 auto;
+    width:150px; background:#fff; padding:8px 8px 22px;
+    box-shadow:0 8px 18px rgba(68,51,94,.12);
+    transform:rotate(var(--tilt, -2deg));
+    transition:transform .25s ease;
+    cursor:pointer;
+  }
+  .film-frame:nth-child(even){ --tilt:2deg; }
+  .film-frame:hover{ transform:rotate(0deg) scale(1.04); z-index:2; }
+  .film-frame img{ width:100%; aspect-ratio:1; object-fit:cover; border-radius:4px; display:block; }
+  .film-frame .cap{ font-family:'Caveat',cursive; text-align:center; font-size:1.1rem; color:var(--ink-soft); margin-top:6px; }
+
+  /* ---------- Photo grid (2 kolom) ---------- */
+  .photo-grid-card{
+    background:#fff; border-radius:16px; overflow:hidden;
+    box-shadow:0 8px 20px rgba(68,51,94,.1);
+    transition:transform .25s ease, box-shadow .25s ease;
+    cursor:pointer;
+  }
+  .photo-grid-card:hover{ transform:translateY(-4px); box-shadow:0 14px 28px rgba(68,51,94,.16); }
+  .photo-grid-card img{ width:100%; aspect-ratio:1; object-fit:cover; display:block; }
+  .photo-grid-card .cap{
+    padding:8px 10px 12px; font-family:'Caveat',cursive;
+    font-size:1.05rem; color:var(--ink-soft); text-align:center;
   }
 
   /* ---------- RSVP ---------- */
@@ -236,17 +522,7 @@
   }
   .chip.selected{ background:var(--pink-deep); border-color:var(--pink-deep); color:#fff; }
 
-  /* ---------- Gallery ---------- */
-  .polaroid{
-    background:#fff; padding:10px 10px 28px 10px; box-shadow:0 10px 20px rgba(92,59,77,.15);
-    transition:transform .25s ease;
-  }
-  .polaroid:nth-child(odd){ transform:rotate(-3deg); }
-  .polaroid:nth-child(even){ transform:rotate(3deg); }
-  .polaroid:hover{ transform:rotate(0deg) scale(1.04); z-index:2; }
-  .polaroid img{ width:100%; aspect-ratio:1; object-fit:cover; border-radius:4px; display:block; }
-
-  /* ---------- Music toggle ---------- */
+  /* ---------- RSVP ---------- */
   #musicToggle{
     position:fixed;
     left:calc(var(--frame-left) + var(--frame-w) - 68px);
@@ -319,12 +595,7 @@
   .timeline-item.in{ opacity:1; transform:translateY(0); }
   .timeline-dot{ width:16px; height:16px; border-radius:50%; background:var(--pink-deep); border:3px solid #fff; box-shadow:0 0 0 3px var(--pink-blush); }
 
-  /* ---------- Prize wheel ---------- */
-  #wheelCanvas{ transition:transform 4.5s cubic-bezier(.17,.67,.1,1); }
-  .wheel-pin{ filter:drop-shadow(0 3px 4px rgba(0,0,0,.25)); }
-  .spin-btn{ box-shadow:0 6px 0 #C23F6C, 0 10px 18px rgba(194,63,108,.3); transition:transform .12s ease, box-shadow .12s ease; }
-  .spin-btn:active{ transform:translateY(4px); box-shadow:0 2px 0 #C23F6C, 0 4px 8px rgba(194,63,108,.3); }
-  .spin-btn:disabled{ opacity:.6; }
+  /* ---------- Prize wheel (removed - replaced by capsule) ---------- */
 
   /* ---------- Lightbox ---------- */
   #lightbox{
@@ -363,19 +634,21 @@
   <svg class="cover-sparkle" style="top:18%; right:10%; width:18px; animation-delay:1s;" viewBox="0 0 24 24" fill="#fff"><path d="M12 0l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z"/></svg>
   <svg class="cover-sparkle" style="bottom:16%; left:16%; width:20px; animation-delay:2s;" viewBox="0 0 24 24" fill="#fff"><path d="M12 0l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z"/></svg>
 
-  <img id="coverMascot" class="cover-mascot-img mb-2" src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Animals/Cat%20Face.png" alt="Maskot Keiko" width="150" height="150">
+  <img id="coverMascot" class="cover-mascot-img mb-2" src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Animals/Unicorn.png" alt="Maskot Keiko" width="150" height="150">
 
-  <p class="cover-line font-script text-3xl text-white/90 -mb-1" style="text-shadow:0 2px 6px rgba(0,0,0,.1)">Kamu diundang ke pesta ulang tahun</p>
-  <h1 class="cover-line font-display text-5xl sm:text-6xl font-700 text-white my-2" style="text-shadow:0 4px 10px rgba(0,0,0,.12)">KEIKO</h1>
-  <p class="cover-line text-white/90 font-semibold tracking-wide mb-8"><i class="fa-solid fa-cake-candles mr-1"></i> yang ke — 7 tahun <i class="fa-solid fa-star"></i></p>
+  <h1 class="cover-line cover-name font-display text-5xl sm:text-6xl font-700 mt-3 mb-2">KEIKO</h1>
+  <p class="cover-line cover-age font-semibold tracking-wide mb-7"><i class="fa-solid fa-cake-candles mr-1"></i> Ulang tahun ke-7 <i class="fa-solid fa-star ml-1"></i></p>
 
-  <p class="cover-line text-white/85 text-sm mb-1" id="guestLabel">Kepada Yth.</p>
-  <p class="cover-line font-display text-xl text-white mb-8" id="guestName">Teman-teman terkasih</p>
+  <div class="cover-line cover-guest-card">
+    <p class="cover-guest-label" id="guestLabel">Kepada Yth.</p>
+    <p class="cover-guest-name font-display text-xl" id="guestName">Teman-teman terkasih</p>
+  </div>
 
-  <button id="openBtn" class="open-btn cover-line font-display text-white text-lg px-10 py-4 rounded-full flex items-center gap-2">
-    <span>Buka Undangan</span>
+  <button id="openBtn" class="open-btn cover-line font-display text-white text-lg px-10 py-[15px] rounded-full flex items-center justify-center gap-2">
+    <span>Buka Surat Undangan</span>
     <i class="fa-solid fa-envelope-open-text"></i>
   </button>
+  <p class="cover-line cover-cta-note">Ketuk tombol untuk mulai ✨</p>
 </div>
 
 <!-- ============ STAGE ============ -->
@@ -393,20 +666,20 @@
     <svg class="parallax-slow absolute" style="top:20%; right:12%; width:16px;" viewBox="0 0 24 24" fill="var(--pink-deep)"><path d="M12 0l2.2 8.8L23 12l-8.8 2.2L12 23l-2.2-8.8L1 12l8.8-2.2z"/></svg>
 
     <div class="relative reveal in" id="heroContent" style="z-index:2;">
-      <p class="font-script text-2xl text-[var(--pink-deeper)]">Selamat datang di dunia dongeng kami~</p>
+      <p class="font-script text-2xl text-[var(--pink-deeper)]">Selamat datang di Taman Bintang Keiko ✨</p>
 
-      <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&h=400&q=80" alt="Keiko" class="mx-auto my-3 w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg" style="box-shadow:0 10px 24px rgba(232,85,133,.25);">
+      <img src="https://images.unsplash.com/photo-1717205964281-ab2bd111dcb2?auto=format&fit=crop&w=400&h=400&q=80" alt="Keiko" class="mx-auto my-3 w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg" style="box-shadow:0 10px 24px rgba(232,85,133,.25);">
 
-      <h2 class="font-display text-4xl font-700 text-[var(--pink-deeper)] leading-tight" id="heroTitle">Ulang Tahun<br>Keiko yang ke-7</h2>
-      <p class="mt-3 text-[var(--ink-soft)] leading-relaxed">Dengan penuh suka cita, kami mengundang teman-teman untuk hadir dan berbagi kebahagiaan di hari istimewa ini 🎀</p>
+      <h2 class="font-display text-4xl font-700 text-[var(--pink-deeper)] leading-tight" id="heroTitle">Pesta Bintang<br>Keiko ke-7</h2>
+      <p class="mt-3 text-[var(--ink)] leading-relaxed font-medium">Malam penuh lampu, tawa, dan kejutan kecil menanti. Yuk datang dan rayakan bersama Keiko — bikin kenangan manis yang nggak akan terlupakan 💜</p>
     </div>
   </section>
 
   <div class="scallop section-front" style="background-image:radial-gradient(circle at 10px -6px, transparent 12px, var(--pink-blush) 13px);"></div>
 
   <!-- ===== COUNTDOWN ===== -->
-  <section class="reveal section-front px-6 py-10 text-center" style="background:linear-gradient(180deg,var(--pink-blush) 0%, var(--pink-mid) 100%);">
-    <p class="font-script text-2xl text-white mb-1"><i class="fa-solid fa-hourglass-half mr-1"></i> Hitung mundur menuju</p>
+  <section class="reveal section-front aurora-card px-6 py-10 text-center" style="background:linear-gradient(180deg,var(--pink-blush) 0%, var(--pink-mid) 100%);">
+    <p class="font-script text-2xl text-white mb-1"><i class="fa-solid fa-hourglass-half mr-1"></i> Menuju Hari Spesialnya</p>
     <h3 class="font-display text-2xl font-600 text-white mb-6"><i class="fa-solid fa-calendar-days mr-1"></i> Sabtu, 15 Agustus 2026</h3>
 
     <div class="grid grid-cols-4 gap-2 max-w-sm mx-auto" id="countdown">
@@ -438,8 +711,8 @@
   <!-- ===== TIMELINE PERJALANAN ===== -->
   <section class="reveal px-6 py-10 relative">
     <div class="text-center mb-8">
-      <p class="font-script text-2xl text-[var(--pink-deeper)]">Tumbuh Setiap Tahun</p>
-      <h3 class="font-display text-2xl font-700">Perjalanan Keiko</h3>
+      <p class="font-script text-2xl text-[var(--pink-deeper)]">Tumbuh Bersama Tiap Tahun</p>
+      <h3 class="font-display text-2xl font-700">Perjalanan Bintang Keiko</h3>
     </div>
 
     <div class="relative" id="timelineWrap">
@@ -451,17 +724,17 @@
   <div class="scallop"></div>
 
   <!-- ===== QUOTE ===== -->
-  <section class="reveal px-8 py-10 text-center relative">
+  <section class="reveal aurora-card px-8 py-10 text-center relative">
     <svg width="34" height="34" viewBox="0 0 24 24" fill="var(--pink-blush)" class="mx-auto mb-3"><path d="M7 7c-2.2 0-4 1.8-4 4v6h6v-6H6c0-1.1.9-2 2-2V7zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V7z"/></svg>
-    <p class="font-script text-2xl text-[var(--pink-deeper)] leading-relaxed">"Setiap tahun yang bertambah adalah kisah baru penuh keajaiban. Terima kasih telah menjadi bagian dari cerita Keiko."</p>
+    <p class="font-script text-2xl text-[var(--pink-deeper)] leading-relaxed">"Setiap doa baikmu di bawah langit malam ini, akan jadi cahaya kecil yang menemani langkah Keiko ke depan."</p>
     <p class="mt-3 text-sm text-[var(--ink-soft)]">— Mama & Papa</p>
   </section>
 
   <!-- ===== ACARA / DETAIL ===== -->
   <section class="reveal px-6 py-8">
     <div class="text-center mb-6">
-      <p class="font-script text-2xl text-[var(--pink-deeper)]">Detail Acara</p>
-      <h3 class="font-display text-2xl font-700">Yuk, Rayakan Bersama!</h3>
+      <p class="font-script text-2xl text-[var(--pink-deeper)]">Info Pesta</p>
+      <h3 class="font-display text-2xl font-700">Kapan & Di Mana?</h3>
     </div>
 
     <div class="space-y-4">
@@ -480,8 +753,8 @@
           <i class="fa-solid fa-location-dot text-xl" style="color:#7C5CD6"></i>
         </div>
         <div class="flex-1">
-          <p class="font-display font-600 text-lg">Rainbow Play Garden</p>
-          <p class="text-sm text-[var(--ink-soft)]">Jl. Melati Indah No. 21, Jakarta Selatan</p>
+          <p class="font-display font-600 text-lg">Moonbeam Party Hall</p>
+          <p class="text-sm text-[var(--ink-soft)]">Jl. Bintang Selatan No. 7, Jakarta Selatan</p>
           <div class="mt-3 rounded-2xl overflow-hidden" style="box-shadow:0 4px 14px rgba(92,59,77,.12);">
             <iframe src="https://maps.google.com/maps?q=Jakarta%20Selatan&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="140" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi acara"></iframe>
           </div>
@@ -490,85 +763,161 @@
 
       <div class="bg-white rounded-3xl p-5 flex items-start gap-4" style="box-shadow:0 8px 20px rgba(92,59,77,.08);">
         <div class="w-12 h-12 rounded-full flex items-center justify-center shrink-0" style="background:var(--mint)">
-          <i class="fa-solid fa-shirt text-xl" style="color:#2FAE73"></i>
+          <i class="fa-solid fa-wand-magic-sparkles text-xl" style="color:#2FAE73"></i>
         </div>
         <div>
           <p class="font-display font-600 text-lg">Dress code</p>
-          <p class="text-sm text-[var(--ink-soft)]">Pastel & warna-warni ceria 🎀</p>
+          <p class="text-sm text-[var(--ink)]">Warna-warna cerah & bintang — scroll ke bawah untuk cobain ganti outfit Keiko! 👗</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CAKE INTERAKTIF ===== -->
-  <section class="reveal px-6 py-10 text-center" style="background:linear-gradient(180deg, var(--cream-2) 0%, var(--lavender) 120%);">
-    <p class="font-script text-2xl text-[var(--pink-deeper)] mb-1">Bantu tiup lilinnya, yuk!</p>
-    <p class="text-sm text-[var(--ink-soft)] mb-6">Ketuk kuenya untuk membuat permohonan ✨</p>
+  <!-- ===== DRESS UP KEIKO ===== -->
+  <section class="reveal px-6 py-10 text-center" style="background:linear-gradient(180deg, var(--cream) 0%, var(--lavender) 130%);">
+    <p class="font-script text-2xl text-[var(--pink-deeper)] mb-1">Ganti Outfit Keiko</p>
+    <h3 class="font-display text-2xl font-700 mb-1">Pilih Warna Baju Favoritmu</h3>
+    <p class="text-sm text-[var(--ink)] mb-5">Ketuk warna di bawah — Keiko langsung ganti baju sesuai pilihanmu!</p>
 
-    <div class="cake-wrap inline-block relative" id="cakeWrap">
-      <svg width="180" height="180" viewBox="0 0 200 200" id="cakeSvg">
-        <ellipse cx="100" cy="178" rx="70" ry="9" fill="#00000010"/>
-        <!-- flame + smoke -->
-        <g id="flame">
-          <path class="flame" d="M100 45 Q94 58 100 66 Q106 58 100 45Z" fill="#FFCF6B"/>
-          <path class="flame" d="M100 50 Q97 58 100 63 Q103 58 100 50Z" fill="#FF914D"/>
-        </g>
-        <g class="smoke" id="smoke">
-          <path d="M100 45 Q92 35 100 25" stroke="#B8A8B5" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </g>
-        <rect x="97" y="60" width="6" height="16" fill="#FFE3A3"/>
-        <!-- top tier -->
-        <rect x="55" y="76" width="90" height="34" rx="8" fill="#FFD9E6"/>
-        <rect x="55" y="76" width="90" height="10" rx="5" fill="#fff"/>
-        <circle cx="70" cy="94" r="4" fill="#FF6F9C"/>
-        <circle cx="100" cy="94" r="4" fill="#B7A2F5"/>
-        <circle cx="130" cy="94" r="4" fill="#FFCF6B"/>
-        <!-- bottom tier -->
-        <rect x="35" y="110" width="130" height="46" rx="10" fill="#fff" stroke="#FFD9E6" stroke-width="4"/>
-        <rect x="35" y="110" width="130" height="12" rx="6" fill="#FFB3CB"/>
-        <path d="M35 156h130v10a8 8 0 0 1-8 8H43a8 8 0 0 1-8-8v-10z" fill="#FF6F9C"/>
+    <div class="avatar-stage">
+      <svg id="keikoAvatar" viewBox="0 0 200 260" width="200" height="260" class="mx-auto">
+        <ellipse cx="100" cy="248" rx="52" ry="7" fill="#00000012"/>
+        <path d="M72 78 Q100 48 128 78 L124 96 Q100 72 76 96 Z" fill="#5a3f72"/>
+        <circle cx="100" cy="92" r="34" fill="#ffe8f2"/>
+        <circle cx="88" cy="90" r="4" fill="#44335e"/>
+        <circle cx="112" cy="90" r="4" fill="#44335e"/>
+        <path d="M94 100 Q100 106 106 100" stroke="#44335e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="78" cy="98" rx="7" ry="4" fill="#ffb8d2"/>
+        <ellipse cx="122" cy="98" rx="7" ry="4" fill="#ffb8d2"/>
+        <path id="avatarDress" d="M68 132 Q100 118 132 132 L142 210 Q100 224 58 210 Z" fill="#E85585"/>
+        <path id="avatarBow" d="M100 128 L88 118 L88 138 Z M100 128 L112 118 L112 138 Z" fill="#FFD889"/>
+        <path d="M58 150 Q42 170 48 196" stroke="#ffe8f2" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M142 150 Q158 170 152 196" stroke="#ffe8f2" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M82 210 L74 248 M118 210 L126 248" stroke="#ffe8f2" stroke-width="12" stroke-linecap="round"/>
       </svg>
-      <p class="text-xs text-[var(--ink-soft)] mt-2" id="cakeHint">👆 Ketuk untuk meniup lilin</p>
     </div>
+
+    <div class="flex justify-center gap-3 flex-wrap max-w-sm mx-auto mb-4" id="outfitPicker">
+      <button type="button" class="outfit-btn active" data-color="#E85585" data-name="Merah Glow" style="background:#E85585" aria-label="Baju merah"><i class="fa-solid fa-shirt"></i></button>
+      <button type="button" class="outfit-btn" data-color="#BB6BFF" data-name="Lilac Star" style="background:#BB6BFF" aria-label="Baju lilac"><i class="fa-solid fa-shirt"></i></button>
+      <button type="button" class="outfit-btn" data-color="#FFD889" data-name="Golden Moon" style="background:#FFD889" aria-label="Baju emas"><i class="fa-solid fa-shirt"></i></button>
+      <button type="button" class="outfit-btn" data-color="#5EDFCF" data-name="Mint Dream" style="background:#5EDFCF" aria-label="Baju mint"><i class="fa-solid fa-shirt"></i></button>
+      <button type="button" class="outfit-btn" data-color="#A8B4D8" data-name="Silver Night" style="background:#A8B4D8" aria-label="Baju silver"><i class="fa-solid fa-shirt"></i></button>
+    </div>
+    <p id="outfitMsg" class="font-script text-2xl text-[var(--pink-deeper)]">Keiko pakai baju Merah Glow — cantik banget! ✨</p>
+  </section>
+
+  <!-- ===== TIUP BINTANG LILIN ===== -->
+  <section class="reveal px-6 py-10 text-center" style="background:linear-gradient(180deg, #2a2145 0%, #1e1833 100%); color:#fff;">
+    <p class="font-script text-2xl mb-1" style="color:#ffd889">Ritual Lilin Bintang</p>
+    <h3 class="font-display text-2xl font-700 mb-1 text-white">Tiup 7 Lilin Keiko</h3>
+    <p class="text-sm mb-6 font-medium" style="color:#e8d8ff">Tahan tombol tiup sampai meter penuh — lalu semua lilin padam serentak! 🌬️</p>
+
+    <div class="star-cake" id="starCake">
+      <svg viewBox="0 0 240 260" width="240" height="260" aria-hidden="true">
+        <defs>
+          <linearGradient id="cakeTopGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F8F0FF"/>
+            <stop offset="100%" stop-color="#E8D8FF"/>
+          </linearGradient>
+          <linearGradient id="cakeBotGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#BB6BFF"/>
+            <stop offset="100%" stop-color="#8E44EC"/>
+          </linearGradient>
+          <linearGradient id="icingGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#fff"/>
+            <stop offset="100%" stop-color="#F4D8FF"/>
+          </linearGradient>
+        </defs>
+        <!-- shadow -->
+        <ellipse cx="120" cy="242" rx="88" ry="10" fill="#00000030"/>
+        <!-- bottom tier -->
+        <rect x="28" y="150" width="184" height="70" rx="14" fill="url(#cakeBotGrad)"/>
+        <rect x="28" y="150" width="184" height="18" rx="10" fill="url(#icingGrad)"/>
+        <path d="M28 168 Q42 182 56 168 Q70 182 84 168 Q98 182 112 168 Q126 182 140 168 Q154 182 168 168 Q182 182 196 168 Q210 182 212 168" fill="none" stroke="#F4D8FF" stroke-width="6" stroke-linecap="round"/>
+        <!-- cherries / sprinkles -->
+        <circle cx="52" cy="190" r="5" fill="#FFD889"/>
+        <circle cx="88" cy="198" r="5" fill="#fff"/>
+        <circle cx="120" cy="188" r="5" fill="#FF9FC0"/>
+        <circle cx="152" cy="198" r="5" fill="#fff"/>
+        <circle cx="188" cy="190" r="5" fill="#FFD889"/>
+        <!-- top tier -->
+        <rect x="58" y="98" width="124" height="54" rx="12" fill="url(#cakeTopGrad)" stroke="#D8CBFF" stroke-width="3"/>
+        <rect x="58" y="98" width="124" height="14" rx="8" fill="#fff"/>
+        <path d="M58 112 Q70 124 82 112 Q94 124 106 112 Q118 124 130 112 Q142 124 154 112 Q166 124 178 112 Q182 120 182 112" fill="none" stroke="#BB6BFF" stroke-width="5" stroke-linecap="round"/>
+        <text x="120" y="140" text-anchor="middle" fill="#8E44EC" font-family="Fredoka,sans-serif" font-size="26" font-weight="700">7</text>
+      </svg>
+      <div id="starCandles" class="absolute inset-0 pointer-events-none"></div>
+    </div>
+
+    <button id="blowBtn" type="button" class="blow-btn font-display text-white px-8 py-3 rounded-full mt-5">Tahan & Tiup 🌬️</button>
+    <div class="blow-meter"><div class="blow-meter-fill" id="blowMeterFill"></div></div>
+    <p class="text-sm mt-3 font-semibold" style="color:#ffd889" id="blowHint">Tahan tombolnya dulu ya~</p>
 
     <div id="wishBox" class="mt-4 opacity-0 transition-opacity duration-500">
-      <p class="font-script text-2xl text-[var(--pink-deeper)]">Yeay! Permohonan terkirim ke bintang 🌟</p>
+      <p class="font-script text-2xl" style="color:#ffd889">Wish-mu sudah terbang ke galaksi Keiko! 🌟</p>
     </div>
   </section>
 
-  <!-- ===== RODA KEBERUNTUNGAN ===== -->
+  <!-- ===== STAR CAPSULE ===== -->
   <section class="reveal px-6 py-10 text-center">
-    <p class="font-script text-2xl text-[var(--pink-deeper)] mb-1">Main Yuk!</p>
-    <h3 class="font-display text-2xl font-700 mb-1">Putar Roda Keberuntungan</h3>
-    <p class="text-sm text-[var(--ink-soft)] mb-6">Coba keberuntunganmu, dapatkan doa & stiker manis</p>
+    <p class="font-script text-2xl text-[var(--pink-deeper)] mb-1">Kejutan dari Semesta</p>
+    <h3 class="font-display text-2xl font-700 mb-1">Mesin Kapsul Bintang</h3>
+    <p class="text-sm text-[var(--ink)] mb-6">Tarik tuas pink-nya — dapat hadiah kejutan spesial buat tamu! 🎁</p>
 
-    <div class="relative inline-block">
-      <svg class="wheel-pin absolute left-1/2 -translate-x-1/2" style="top:-14px; z-index:10;" width="28" height="28" viewBox="0 0 24 24"><path d="M12 20L2 4h20z" fill="var(--pink-deeper)"/></svg>
-      <canvas id="wheelCanvas" width="280" height="280" style="max-width:78vw; height:auto;"></canvas>
+    <div class="capsule-machine" id="capsuleMachine">
+      <div class="capsule-header"><span>✦ STAR GACHA ✦</span></div>
+      <div class="capsule-stars" aria-hidden="true">
+        <span class="capsule-star" style="top:12%;left:8%">✦</span>
+        <span class="capsule-star" style="top:18%;right:10%;animation-delay:.6s">✧</span>
+        <span class="capsule-star" style="bottom:22%;left:12%;animation-delay:1.1s">✦</span>
+        <span class="capsule-star" style="bottom:16%;right:8%;animation-delay:.3s">✧</span>
+      </div>
+      <div class="capsule-body">
+        <div class="capsule-window">
+          <div class="capsule-orbs" id="capsuleOrbs"></div>
+          <span class="capsule-chute-label">DISPENSER</span>
+        </div>
+        <div class="capsule-lever-box" id="capsuleLeverBox">
+          <div class="capsule-lever-arm">
+            <button id="capsuleBtn" type="button" class="capsule-lever-knob" aria-label="Tarik tuas"></button>
+            <div class="capsule-lever-stick"></div>
+          </div>
+          <span class="capsule-lever-label">TARIK</span>
+        </div>
+      </div>
+      <div class="capsule-slot">
+        <div class="capsule-ball half" id="capsuleBall"></div>
+      </div>
     </div>
-    <div>
-      <button id="spinBtn" class="spin-btn btn-pop font-display text-white px-8 py-3 rounded-full mt-6" style="background:linear-gradient(135deg,var(--pink-deep),var(--pink-deeper));">Putar Sekarang 🎡</button>
-    </div>
-    <p id="wheelResult" class="font-script text-2xl text-[var(--pink-deeper)] mt-4 min-h-[32px]"></p>
+    <p id="capsuleResult" class="font-script text-2xl text-[var(--pink-deeper)] mt-4 min-h-[32px]"></p>
   </section>
 
-  <!-- ===== GALERI ===== -->
-  <section class="reveal px-6 py-10">
+  <!-- ===== GALERI FILM STRIP ===== -->
+  <section class="reveal px-6 py-10" style="background:linear-gradient(180deg,var(--cream-2),var(--cream));">
     <div class="text-center mb-6">
-      <p class="font-script text-2xl text-[var(--pink-deeper)]">Momen Manis</p>
-      <h3 class="font-display text-2xl font-700">Galeri Kenangan</h3>
-      <p class="text-xs text-[var(--ink-soft)] mt-1">*ganti dengan foto asli Keiko ya</p>
+      <p class="font-script text-2xl text-[var(--pink-deeper)]">Gulungan Kenangan</p>
+      <h3 class="font-display text-2xl font-700">Momen Keiko Berputar</h3>
+      <p class="text-xs text-[var(--ink)] mt-1 font-medium">Film bergulir otomatis — sentuh untuk jeda sebentar</p>
     </div>
-    <div class="grid grid-cols-2 gap-4" id="gallery">
-      <!-- placeholders generated by JS -->
+    <div class="film-wrap">
+      <div class="film-marquee" id="filmMarquee">
+        <div class="film-strip" id="filmStrip"></div>
+        <div class="film-strip" id="filmStripClone" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <p class="font-script text-xl text-[var(--pink-deeper)] text-center mb-4">Potret Keiko</p>
+      <div class="grid grid-cols-2 gap-3 max-w-sm mx-auto" id="photoGrid"></div>
     </div>
   </section>
 
   <!-- ===== RSVP ===== -->
-  <section class="reveal px-6 py-10" style="background:linear-gradient(180deg, var(--pink-blush) 0%, var(--cream) 100%);">
+  <section class="reveal aurora-card px-6 py-10" style="background:linear-gradient(180deg, var(--pink-blush) 0%, var(--cream) 100%);">
     <div class="text-center mb-6">
       <p class="font-script text-2xl text-[var(--pink-deeper)]">Konfirmasi Kehadiran</p>
-      <h3 class="font-display text-2xl font-700">Kami Tunggu Kamu!</h3>
+      <h3 class="font-display text-2xl font-700">Kamu Datang, Kan?</h3>
     </div>
 
     <form id="rsvpForm" class="space-y-4 max-w-sm mx-auto">
@@ -595,19 +944,19 @@
   </section>
 
   <!-- ===== GUESTBOOK WALL ===== -->
-  <section class="reveal px-6 py-10" style="background:var(--cream-2);">
+  <section class="reveal aurora-card px-6 py-10" style="background:var(--cream-2);">
     <div class="text-center mb-6">
-      <p class="font-script text-2xl text-[var(--pink-deeper)]">Papan Ucapan</p>
-      <h3 class="font-display text-2xl font-700">Kata Mereka</h3>
+      <p class="font-script text-2xl text-[var(--pink-deeper)]">Dinding Ucapan</p>
+      <h3 class="font-display text-2xl font-700">Pesan Manis untuk Keiko</h3>
     </div>
     <div class="grid grid-cols-2 gap-3" id="guestbookWall"></div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="relative px-6 py-12 text-center overflow-hidden" style="background:linear-gradient(135deg,var(--pink-deeper),#B7477A);">
-    <img src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Animals/Cat%20Face.png" alt="" class="mx-auto mb-3 w-20 h-20 object-contain drop-shadow-lg" aria-hidden="true">
-    <p class="font-script text-2xl text-white">Terima kasih sudah mampir~</p>
-    <p class="text-white/85 text-sm mt-2 max-w-xs mx-auto">Sampai jumpa di pesta Keiko! Dadah, semoga harimu semanis permen kapas 🍬</p>
+  <footer class="relative px-6 py-12 text-center overflow-hidden" style="background:linear-gradient(135deg,var(--pink-deeper),#5A2DA6);">
+    <img src="https://cdn.jsdelivr.net/gh/Tarikul-Islam-Anik/Animated-Fluent-Emojis@master/Emojis/Travel%20and%20places/Glowing%20Star.png" alt="" class="mx-auto mb-3 w-20 h-20 object-contain drop-shadow-lg" aria-hidden="true">
+    <p class="font-script text-2xl text-white">Terima kasih sudah jadi bagian ceritanya~</p>
+    <p class="text-white/90 text-sm mt-2 max-w-xs mx-auto">Sampai jumpa di Pesta Bintang Keiko. Jangan lupa bawa senyum terbaikmu! 💫</p>
     <p class="text-white/50 text-[11px] mt-8 tracking-wide">Dibuat dengan 💗 — Undangan Digital</p>
   </footer>
 
@@ -761,22 +1110,88 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // ---------- Cake blow interaction ----------
-  const cakeWrap = document.getElementById('cakeWrap');
-  const flame = document.getElementById('flame');
-  const smoke = document.getElementById('smoke');
-  const wishBox = document.getElementById('wishBox');
-  const cakeHint = document.getElementById('cakeHint');
-  let blown = false;
-  cakeWrap.addEventListener('click', () => {
-    if(blown) return;
-    blown = true;
-    flame.classList.add('blown');
-    smoke.classList.add('show');
-    wishBox.style.opacity = '1';
-    cakeHint.textContent = '💕 Permohonan terkabul!';
-    launchConfetti(40);
+  // ---------- Outfit picker (dress-up Keiko) ----------
+  const avatarDress = document.getElementById('avatarDress');
+  const avatarBow = document.getElementById('avatarBow');
+  const outfitMsg = document.getElementById('outfitMsg');
+  const bowMap = {
+    '#E85585':'#FFD889',
+    '#BB6BFF':'#E8D8FF',
+    '#FFD889':'#FF9F43',
+    '#5EDFCF':'#BB6BFF',
+    '#A8B4D8':'#F8F6FF'
+  };
+  document.querySelectorAll('.outfit-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.outfit-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const color = btn.dataset.color;
+      const name = btn.dataset.name;
+      if(avatarDress) avatarDress.setAttribute('fill', color);
+      if(avatarBow) avatarBow.setAttribute('fill', bowMap[color] || '#FFD889');
+      if(outfitMsg) outfitMsg.textContent = `Keiko pakai baju ${name} — cantik banget! ✨`;
+      if(typeof gsap !== 'undefined'){
+        gsap.fromTo('#keikoAvatar', {scale:0.96}, {scale:1, duration:0.35, ease:'back.out(2)'});
+      }
+    });
   });
+
+  // ---------- Star cake: tahan tombol untuk tiup semua lilin ----------
+  const starCandles = document.getElementById('starCandles');
+  const candlePositions = [
+    {left:'32%', top:'27%'}, {left:'38%', top:'25%'}, {left:'44%', top:'24%'},
+    {left:'50%', top:'23%'}, {left:'56%', top:'24%'}, {left:'62%', top:'25%'}, {left:'68%', top:'27%'}
+  ];
+  candlePositions.forEach((pos,i)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'absolute flex flex-col items-center';
+    wrap.style.left = pos.left;
+    wrap.style.top = pos.top;
+    wrap.style.transform = 'translateX(-50%)';
+    wrap.innerHTML = `<div class="star-flame" data-i="${i}"></div><div class="candle-stick"></div>`;
+    starCandles.appendChild(wrap);
+  });
+  const flames = starCandles.querySelectorAll('.star-flame');
+  const blowBtn = document.getElementById('blowBtn');
+  const blowMeterFill = document.getElementById('blowMeterFill');
+  const blowHint = document.getElementById('blowHint');
+  const wishBox = document.getElementById('wishBox');
+  let blowAmount = 0;
+  let blowTimer = null;
+  let cakeDone = false;
+
+  function finishBlow(){
+    if(cakeDone) return;
+    cakeDone = true;
+    flames.forEach(f=>f.classList.add('off'));
+    blowMeterFill.style.width = '100%';
+    blowHint.textContent = 'Semua lilin padam! Wish-mu terkirim ✨';
+    wishBox.style.opacity = '1';
+    launchConfetti(70);
+    blowBtn.disabled = true;
+  }
+  function startBlow(){
+    if(cakeDone) return;
+    blowBtn.classList.add('holding');
+    blowTimer = setInterval(()=>{
+      blowAmount = Math.min(100, blowAmount + 4);
+      blowMeterFill.style.width = blowAmount + '%';
+      if(blowAmount >= 100) finishBlow();
+    }, 60);
+  }
+  function stopBlow(){
+    blowBtn.classList.remove('holding');
+    if(blowTimer){ clearInterval(blowTimer); blowTimer = null; }
+    if(!cakeDone){
+      blowAmount = Math.max(0, blowAmount - 8);
+      blowMeterFill.style.width = blowAmount + '%';
+    }
+  }
+  blowBtn.addEventListener('mousedown', startBlow);
+  blowBtn.addEventListener('mouseup', stopBlow);
+  blowBtn.addEventListener('mouseleave', stopBlow);
+  blowBtn.addEventListener('touchstart', (e)=>{ e.preventDefault(); startBlow(); }, {passive:false});
+  blowBtn.addEventListener('touchend', stopBlow);
 
   // ---------- RSVP chips ----------
   const chips = document.querySelectorAll('.chip-btn');
@@ -814,24 +1229,45 @@
     return div.innerHTML;
   }
 
-  // ---------- Gallery (foto dari Unsplash) ----------
-  const gallery = document.getElementById('gallery');
-  const galleryPhotos = [
-    { src:'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=500&h=500&q=80', cap:'Senyum manis' },
-    { src:'https://images.unsplash.com/photo-1515488042361-ee00e745deb1?auto=format&fit=crop&w=500&h=500&q=80', cap:'Main bareng' },
-    { src:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=500&h=500&q=80', cap:'Pesta seru' },
-    { src:'https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=500&h=500&q=80', cap:'Momen bahagia' }
+  // ---------- Film strip gallery (auto infinite scroll) ----------
+  const filmStrip = document.getElementById('filmStrip');
+  const filmStripClone = document.getElementById('filmStripClone');
+  const photoGrid = document.getElementById('photoGrid');
+  const filmPhotos = [
+    { src:'https://images.unsplash.com/photo-1717205964281-ab2bd111dcb2?auto=format&fit=crop&w=500&h=500&q=80', cap:'Foto bareng kue' },
+    { src:'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=500&h=500&q=80', cap:'Anak-anak ceria' },
+    { src:'https://images.unsplash.com/photo-1558636508-e0db3814bd1d?auto=format&fit=crop&w=500&h=500&q=80', cap:'Pesta ulang tahun' },
+    { src:'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?auto=format&fit=crop&w=500&h=500&q=80', cap:'Tiup lilin' },
+    { src:'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=500&h=500&q=80', cap:'Balon warna-warni' },
+    { src:'https://images.pexels.com/photos/8613329/pexels-photo-8613329.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop', cap:'Party time' }
   ];
-  galleryPhotos.forEach((photo, i)=>{
-    const div = document.createElement('div');
-    div.className = 'polaroid rounded-md cursor-pointer';
-    div.innerHTML = `<img src="${photo.src}" alt="${photo.cap}" loading="lazy">
-      <p class="font-script text-center text-lg mt-1 text-[var(--ink-soft)]">${photo.cap}</p>`;
-    div.addEventListener('click', ()=>{
-      document.getElementById('lightboxContent').innerHTML = `<img src="${photo.src}" alt="${photo.cap}" class="w-full rounded-xl">`;
-      document.getElementById('lightbox').classList.add('show');
-    });
-    gallery.appendChild(div);
+  const gridPhotos = [
+    { src:'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?auto=format&fit=crop&w=500&h=500&q=80', cap:'Senyum manis' },
+    { src:'https://images.unsplash.com/photo-1544776193-352d25ca82cd?auto=format&fit=crop&w=500&h=500&q=80', cap:'Teman-teman' },
+    { src:'https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop', cap:'Momen bahagia' },
+    { src:'https://images.pexels.com/photos/3661397/pexels-photo-3661397.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop', cap:'Rayakan bersama' },
+    { src:'https://images.pexels.com/photos/7879620/pexels-photo-7879620.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop', cap:'Dekorasi pesta' },
+    { src:'https://images.pexels.com/photos/8613379/pexels-photo-8613379.jpeg?auto=compress&cs=tinysrgb&w=500&h=500&fit=crop', cap:'Kenangan manis' }
+  ];
+  function openPhotoLightbox(src, cap){
+    document.getElementById('lightboxContent').innerHTML = `<img src="${src}" alt="${cap}" class="w-full rounded-xl">`;
+    document.getElementById('lightbox').classList.add('show');
+  }
+  function buildFilmFrame(photo, parent){
+    const frame = document.createElement('div');
+    frame.className = 'film-frame';
+    frame.innerHTML = `<img src="${photo.src}" alt="${photo.cap}" loading="lazy" referrerpolicy="no-referrer"><p class="cap">${photo.cap}</p>`;
+    frame.addEventListener('click', ()=> openPhotoLightbox(photo.src, photo.cap));
+    parent.appendChild(frame);
+  }
+  filmPhotos.forEach(photo=> buildFilmFrame(photo, filmStrip));
+  filmPhotos.forEach(photo=> buildFilmFrame(photo, filmStripClone));
+  gridPhotos.forEach(photo=>{
+    const card = document.createElement('div');
+    card.className = 'photo-grid-card';
+    card.innerHTML = `<img src="${photo.src}" alt="${photo.cap}" loading="lazy" referrerpolicy="no-referrer"><p class="cap">${photo.cap}</p>`;
+    card.addEventListener('click', ()=> openPhotoLightbox(photo.src, photo.cap));
+    photoGrid.appendChild(card);
   });
 
   // ---------- Ambient balloons (realistic w/ gradient shine) ----------
@@ -973,13 +1409,13 @@
   }
   // ---------- Timeline perjalanan ----------
   const timelineData = [
-    {age:1, text:'Langkah kecil pertama Keiko menggemaskan seluruh keluarga.', icon:'👣'},
-    {age:2, text:'Mulai celoteh lucu dan senang bernyanyi riang.', icon:'🎵'},
-    {age:3, text:'Jatuh cinta pada boneka kucing dan dongeng sebelum tidur.', icon:'🧸'},
-    {age:4, text:'Hari pertama sekolah, berani walau sempat malu-malu.', icon:'🎒'},
-    {age:5, text:'Belajar naik sepeda roda tiga tanpa takut jatuh.', icon:'🚲'},
-    {age:6, text:'Suka menggambar dan mewarnai dunia dengan imajinasinya.', icon:'🎨'},
-    {age:7, text:'Kini tumbuh jadi anak ceria, pemberani, dan penuh cinta.', icon:'🌟'}
+    {age:1, text:'Belajar berjalan sambil ketawa paling keras di rumah.', icon:'👣'},
+    {age:2, text:'Sering nyanyi sendiri — liriknya campur aduk tapi lucu.', icon:'🎤'},
+    {age:3, text:'Mulai koleksi boneka unicorn dan benda-benda bintang.', icon:'🦄'},
+    {age:4, text:'Pertama kali tampil percaya diri di depan kelas.', icon:'🎒'},
+    {age:5, text:'Hobi menari makin kuat, plus bikin koreografi sendiri.', icon:'💃'},
+    {age:6, text:'Suka membuat kartu ucapan handmade untuk keluarga.', icon:'🎨'},
+    {age:7, text:'Tumbuh jadi anak yang hangat, cerdas, dan penuh cahaya.', icon:'✨'}
   ];
   const timelineItems = document.getElementById('timelineItems');
   timelineData.forEach((t,i)=>{
@@ -1013,57 +1449,75 @@
     });
   }
 
-  // ---------- Prize wheel ----------
-  const wheelCanvas = document.getElementById('wheelCanvas');
-  const wctx = wheelCanvas.getContext('2d');
-  const prizes = ['Stiker Bintang','Doa Panjang Umur','Voucher Es Krim','Peluk Virtual 🤗','Stiker Kucing','Ucapan Spesial'];
-  const wheelColors = ['#FF6F9C','#B7A2F5','#FFCF6B','#7CE0B0','#FFD9E6','#F7A8C6'];
-  function drawWheel(rotation){
-    const cx = 140, cy = 140, r = 132;
-    wctx.clearRect(0,0,280,280);
-    const sliceAngle = (Math.PI*2)/prizes.length;
-    prizes.forEach((p,i)=>{
-      const start = rotation + i*sliceAngle;
-      const end = start + sliceAngle;
-      wctx.beginPath();
-      wctx.moveTo(cx,cy);
-      wctx.arc(cx,cy,r,start,end);
-      wctx.closePath();
-      wctx.fillStyle = wheelColors[i % wheelColors.length];
-      wctx.fill();
-      wctx.save();
-      wctx.translate(cx,cy);
-      wctx.rotate(start + sliceAngle/2);
-      wctx.textAlign = 'right';
-      wctx.fillStyle = '#fff';
-      wctx.font = '600 11px Quicksand, sans-serif';
-      wctx.fillText(p, r-14, 4);
-      wctx.restore();
-    });
-    wctx.beginPath();
-    wctx.arc(cx,cy,20,0,Math.PI*2);
-    wctx.fillStyle = '#fff';
-    wctx.fill();
-  }
-  drawWheel(0);
-  let spinning = false;
-  const spinBtn = document.getElementById('spinBtn');
-  const wheelResult = document.getElementById('wheelResult');
-  spinBtn.addEventListener('click', ()=>{
-    if(spinning) return;
-    spinning = true;
-    spinBtn.disabled = true;
-    wheelResult.textContent = '';
-    const sliceAngle = 360/prizes.length;
-    const winnerIndex = Math.floor(Math.random()*prizes.length);
-    const targetDeg = 360*5 + (360 - (winnerIndex*sliceAngle) - sliceAngle/2);
-    wheelCanvas.style.transform = `rotate(${targetDeg}deg)`;
+  // ---------- Star capsule gacha ----------
+  const capsuleBtn = document.getElementById('capsuleBtn');
+  const capsuleBall = document.getElementById('capsuleBall');
+  const capsuleResult = document.getElementById('capsuleResult');
+  const capsuleMachine = document.getElementById('capsuleMachine');
+  const capsuleLeverBox = document.getElementById('capsuleLeverBox');
+  const capsuleOrbs = document.getElementById('capsuleOrbs');
+  const capsuleColors = [
+    { top:'#fff', bot:'#BB6BFF' },
+    { top:'#fff', bot:'#FF9FC0' },
+    { top:'#fff', bot:'#7DD3FC' },
+    { top:'#fff', bot:'#FFD889' },
+    { top:'#fff', bot:'#BEF2DB' },
+    { top:'#fff', bot:'#F472B6' }
+  ];
+  const capsulePrizes = [
+    'Pass Foto Neon Booth 📸',
+    'Voucher Milkshake Galaksi 🥤',
+    'Sticker Unicorn Limited ✨',
+    'Extra Glow Bracelet 💫',
+    'Mystery Gift dari Keiko 🎁',
+    'VIP Dance Floor Access 🕺'
+  ];
+  const orbLayout = [
+    { left:'8%', top:'18%', size:28, delay:0 },
+    { left:'28%', top:'8%', size:24, delay:.4 },
+    { left:'50%', top:'22%', size:30, delay:.8 },
+    { left:'72%', top:'10%', size:22, delay:1.2 },
+    { left:'18%', top:'48%', size:26, delay:.2 },
+    { left:'42%', top:'52%', size:32, delay:.6 },
+    { left:'65%', top:'46%', size:24, delay:1 },
+    { left:'82%', top:'55%', size:20, delay:1.4 }
+  ];
+  orbLayout.forEach((o, i)=>{
+    const orb = document.createElement('div');
+    orb.className = 'capsule-orb';
+    const c = capsuleColors[i % capsuleColors.length];
+    orb.style.cssText = `left:${o.left};top:${o.top};width:${o.size}px;height:${o.size}px;background:linear-gradient(180deg,${c.top} 48%,${c.bot} 52%);animation-delay:${o.delay}s;`;
+    capsuleOrbs.appendChild(orb);
+  });
+  let capsuleBusy = false;
+  capsuleBtn.addEventListener('click', ()=>{
+    if(capsuleBusy) return;
+    capsuleBusy = true;
+    capsuleBtn.disabled = true;
+    capsuleLeverBox.classList.add('pulling');
+    capsuleMachine.classList.add('shake');
+    capsuleResult.textContent = 'Mesin berputar... siap-siap ya!';
+    capsuleResult.classList.remove('capsule-result-pop');
+    capsuleBall.classList.remove('drop');
+    void capsuleBall.offsetWidth;
+    const color = capsuleColors[Math.floor(Math.random()*capsuleColors.length)];
+    capsuleBall.style.setProperty('--cap-top', color.top);
+    capsuleBall.style.setProperty('--cap-bot', color.bot);
+    const prize = capsulePrizes[Math.floor(Math.random()*capsulePrizes.length)];
     setTimeout(()=>{
-      wheelResult.textContent = `🎉 Kamu dapat: ${prizes[winnerIndex]}!`;
-      launchConfetti(50);
-      spinning = false;
-      spinBtn.disabled = false;
-    }, 4600);
+      capsuleBall.classList.add('drop');
+    }, 320);
+    setTimeout(()=>{
+      capsuleResult.textContent = `🎉 Selamat! Kamu dapat: ${prize}`;
+      capsuleResult.classList.add('capsule-result-pop');
+      launchConfetti(55);
+    }, 900);
+    setTimeout(()=>{
+      capsuleLeverBox.classList.remove('pulling');
+      capsuleMachine.classList.remove('shake');
+      capsuleBtn.disabled = false;
+      capsuleBusy = false;
+    }, 1400);
   });
 
   // ---------- Guestbook wall ----------
@@ -1170,7 +1624,8 @@
     });
     el.addEventListener('mouseleave', ()=>{ el.style.transform = ''; });
   }
-  document.querySelectorAll('.polaroid').forEach(el=>addTilt(el, 10));
+  document.querySelectorAll('.film-frame').forEach(el=>addTilt(el, 8));
+  document.querySelectorAll('.photo-grid-card').forEach(el=>addTilt(el, 6));
 
   // ---------- Music (sama seperti index.html) ----------
   const bgMusic = document.getElementById('bgMusic');
